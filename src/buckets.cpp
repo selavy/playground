@@ -7,10 +7,9 @@
 #include <climits>
 
 struct Bucketeer {
-    Bucketeer(std::vector<uint32_t> bs) : total(0ull), buckets(std::move(bs)), counts(buckets.size() + 1, 0)
+    Bucketeer(std::vector<uint32_t> bs) : buckets(std::move(bs)), counts(buckets.size() + 1, 0)
     {
         buckets.push_back(UINT32_MAX);
-        assert(!buckets.empty() && "invalid buckets configuration");
     }
 
     void add(uint32_t x) noexcept {
@@ -34,7 +33,7 @@ struct Bucketeer {
         }
     }
 
-    uint64_t total;
+    uint64_t total = 0ull;
     std::vector<uint32_t> buckets;
     std::vector<uint32_t> counts;
 };
